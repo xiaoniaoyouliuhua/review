@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,initial-scale=1.0"/>
+    <title></title>
+    <style>
+        .container{
+            height: 100px;
+            background-color: green;
+        }
+        .container a{
+            display:block;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container"><a href="#"></a></div>
+</body>
+<script>
+    var box=document.querySelector("div");
+    //    box.addEventListener("click",function(){
+    //        console.log("click");
+    //    })
+    tap(box,function(e){
+        console.log(e.target);
+    })
+    function tap(obj,callback){
+        if(obj&&typeof(obj)=='object'){
+            var startTime=0;
+            var isMove=false;
+            obj.addEventListener("touchstart",function(){
+                startTime=Date.now()
+            })
+            obj.addEventListener("touchmove",function(){
+                isMove=true;
+            })
+            obj.addEventListener("touchend",function(e){
+                if(!isMove&&(Date.now()-startTime)<150){
+                    callback&&callback(e);
+                }
+                startTime=0;
+                isMove=false;
+            })
+        }
+    }
+
+</script>
+</html>
